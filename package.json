@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
