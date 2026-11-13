@@ -7,10 +7,7 @@ import { WikipediaResponseParser } from "./api/WikipediaResponseParser";
 import { ConsoleResultPrinter } from "./output/ConsoleResultPrinter";
 import { SystemBrowserOpener } from "./browser/SystemBrowserOpener";
 
-/**
- * Точка входа (composition root): единственное место, где создаются
- * конкретные объекты и передаются приложению через конструктор.
- */
+/* Точка входа. */
 async function main(): Promise<void> {
   const urlBuilder = new WikipediaUrlBuilder();
 

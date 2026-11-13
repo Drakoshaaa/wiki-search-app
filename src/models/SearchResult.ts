@@ -1,7 +1,3 @@
-/**
- * Одна найденная статья Википедии.
- * Неизменяемый объект: все поля readonly и задаются только в конструкторе.
- */
 export class SearchResult {
   constructor(
     public readonly pageId: number,

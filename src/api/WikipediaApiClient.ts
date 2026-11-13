@@ -2,11 +2,11 @@ import { SearchClient } from "../interfaces/SearchClient";
 import { WikipediaUrlBuilder } from "./WikipediaUrlBuilder";
 import { NetworkError } from "../errors/NetworkError";
 
-/** Этап 2. Отправляет запрос к API Википедии и возвращает тело ответа как строку. */
+/* Отправляет запрос к API Википедии и возвращает тело ответа как строку. */
 export class WikipediaApiClient implements SearchClient {
   constructor(
     private readonly urlBuilder: WikipediaUrlBuilder,
-    private readonly timeoutMs: number = 10_000,
+    private readonly timeoutMs: number = 10000,
   ) {}
 
   async search(query: string): Promise<string> {
@@ -15,8 +15,7 @@ export class WikipediaApiClient implements SearchClient {
     let response: Response;
     try {
       response = await fetch(url, {
-        // Википедия просит указывать User-Agent
-        headers: { "User-Agent": "WikiSearchLab/1.0 (educational console project)" },
+        headers: { "User-Agent": "WikiSearchApp/1.0 (educational console project)" },
         signal: AbortSignal.timeout(this.timeoutMs),
       });
     } catch (error) {

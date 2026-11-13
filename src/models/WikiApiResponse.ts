@@ -1,7 +1,3 @@
-/**
- * Типы "сырого" JSON-ответа API Википедии.
- * Все поля необязательные: мы не можем доверять серверу и проверяем их в парсере.
- */
 export interface RawSearchItem {
   ns: number;
   title: string;

@@ -2,7 +2,7 @@ import * as readline from "node:readline";
 import { InputReader } from "../interfaces/InputReader";
 import { InputClosedError } from "../errors/InputClosedError";
 
-/** Читает строки из консоли через встроенный модуль readline. */
+/* Читает строки из консоли через встроенный модуль readline. */
 export class ConsoleInputReader implements InputReader {
   private readonly rl: readline.Interface;
   private closed = false;
@@ -14,8 +14,7 @@ export class ConsoleInputReader implements InputReader {
       output: process.stdout,
     });
 
-    // Если поток ввода закрыли (Ctrl+D / Ctrl+C), а мы ждали ответ,
-    // завершаем ожидание ошибкой, иначе промис повис бы навсегда.
+    /* Если поток ввода закрыли (Ctrl+D / Ctrl+C), а мы ждали ответ, то завершаем ожидание ошибкой */
     this.rl.on("close", () => {
       this.closed = true;
       this.pendingReject?.(new InputClosedError());

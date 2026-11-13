@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { BrowserOpener } from "../interfaces/BrowserOpener";
 import { BrowserOpenError } from "../errors/BrowserOpenError";
 
-/** Этап 5. Открывает адрес в браузере по умолчанию (Windows, macOS, Linux). */
+/* Открывает адрес в браузере по умолчанию (Windows, macOS, Linux). */
 export class SystemBrowserOpener implements BrowserOpener {
   open(url: string): Promise<void> {
     if (!/^https?:\/\//i.test(url)) {
@@ -12,7 +12,6 @@ export class SystemBrowserOpener implements BrowserOpener {
     const [command, args] = this.commandFor(url);
 
     return new Promise<void>((resolve, reject) => {
-      // spawn без shell: адрес передаётся как аргумент и не может выполниться как команда
       const child = spawn(command, args, { detached: true, stdio: "ignore" });
       child.once("error", (error) => reject(new BrowserOpenError(url, error.message)));
       child.once("spawn", () => {
@@ -22,7 +21,7 @@ export class SystemBrowserOpener implements BrowserOpener {
     });
   }
 
-  /** Выбирает системную команду открытия ссылки в зависимости от ОС. */
+  /* Выбирает системную команду открытия ссылки в зависимости от ОС. */
   private commandFor(url: string): [string, string[]] {
     switch (process.platform) {
       case "win32":

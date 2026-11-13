@@ -9,10 +9,8 @@ import { AppError } from "../errors/AppError";
 import { InputClosedError } from "../errors/InputClosedError";
 import { InvalidChoiceError } from "../errors/InvalidChoiceError";
 
-/**
- * Оркестратор: ведёт сценарий "запрос -> поиск -> разбор -> вывод -> выбор -> браузер".
- * Зависит только от интерфейсов, конкретные классы ему передают снаружи (main.ts).
- */
+/* Основной класс приложения, производит следю цепочку: "запрос -> поиск -> разбор -> вывод -> выбор -> браузер". */
+
 export class WikipediaSearchApp {
   private static readonly EXIT_COMMANDS = ["exit", "quit", "выход"];
 
@@ -46,7 +44,7 @@ export class WikipediaSearchApp {
     this.printer.printMessage("До свидания!");
   }
 
-  /** Один цикл поиска. Возвращает false, если пользователь попросил выйти. */
+  /* Один цикл поиска. Возвращает false, если пользователь попросил выйти. */
   private async handleOneSearch(): Promise<boolean> {
     const input = await this.reader.ask("Поисковый запрос: ");
     if (this.isExitCommand(input)) {
@@ -62,7 +60,7 @@ export class WikipediaSearchApp {
 
     const chosen = await this.chooseResult(results);
     if (chosen === null) {
-      return true; // пользователь выбрал 0 - начинаем новый поиск
+      return true;
     }
 
     await this.opener.open(chosen.url);
@@ -70,7 +68,7 @@ export class WikipediaSearchApp {
     return true;
   }
 
-  /** Спрашивает номер, пока не получит корректный. null означает "новый поиск". */
+  /* Спрашивает номер, пока не получит корректный. null означает "новый поиск". */
   private async chooseResult(results: SearchResult[]): Promise<SearchResult | null> {
     while (true) {
       const input = await this.reader.ask(`Номер статьи (1-${results.length}, 0 - новый поиск): `);
@@ -91,7 +89,7 @@ export class WikipediaSearchApp {
     return WikipediaSearchApp.EXIT_COMMANDS.includes(input.trim().toLowerCase());
   }
 
-  /** Ожидаемые ошибки показываем как есть, неожиданные - обобщённо, но без падения. */
+  /* Ожидаемые ошибки */
   private reportError(error: unknown): void {
     if (error instanceof AppError) {
       this.printer.printError(error.message);

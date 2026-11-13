@@ -1,7 +1,7 @@
 import { ResultPrinter } from "../interfaces/ResultPrinter";
 import { SearchResult } from "../models/SearchResult";
 
-/** Этап 4. Выводит результаты и сообщения в консоль. */
+/* Выводит результаты и сообщения в консоль. */
 export class ConsoleResultPrinter implements ResultPrinter {
   private static readonly MAX_SNIPPET_LENGTH = 150;
 

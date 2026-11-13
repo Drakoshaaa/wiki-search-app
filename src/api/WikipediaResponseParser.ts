@@ -5,7 +5,7 @@ import { WikipediaUrlBuilder } from "./WikipediaUrlBuilder";
 import { ParseError } from "../errors/ParseError";
 import { NoResultsError } from "../errors/NoResultsError";
 
-/** Этап 3. Разбирает JSON-ответ Википедии и превращает его в список SearchResult. */
+/* Разбирает JSON-ответ Википедии и превращает его в список SearchResult. */
 export class WikipediaResponseParser implements ResponseParser {
   constructor(private readonly urlBuilder: WikipediaUrlBuilder) {}
 
